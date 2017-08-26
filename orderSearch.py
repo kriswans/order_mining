@@ -1,7 +1,8 @@
 """
 version 0.2
 author kriswans@cisco.com
-This tool performs a regex search of all fields and selectively outputs rows based on search criteria
+This tool performs a regex search of all fields in the selected input files and selectively outputs rows based on search criteria.
+
 It will output to console and a tiemstamped tab delimited file.
 
 The input is fixed to tab delimited files with columns Serial#/PAK#, CiscoPart#, CiscoSO#, CiscoPO#
