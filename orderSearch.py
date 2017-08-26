@@ -1,3 +1,13 @@
+"""
+version 0.2
+author kriswans@cisco.com
+This tool performs a regex search of all fields and selectively outputs rows based on search criteria
+It will output to console and a tiemstamped tab delimited file.
+
+The input is fixed to tab delimited files with columns Serial#/PAK#, CiscoPart#, CiscoSO#, CiscoPO#
+
+The input is seperated into 3 different FYs of Data named FY15.txt, FY16.txt, and FY17.txt .
+"""
 import re
 import time
 import datetime
@@ -54,11 +64,48 @@ def orderSearch():
         sys.exit()
 
 
+    columns=[]
+    limit_out='0'
+    choices={'1': 'Serial#','2':'Part#','3':'SO#','4':'PO#'}
+
+    print("\nLimit output columns?\n\nType: '1' for SN, '2' for Part#, '3' for SO#, '4' for PO#, 'a' for all, or <return> to continue.\n" )
+
+    while limit_out is '0' or limit_out is '1' or limit_out is '2' or limit_out is '3' or limit_out is '4':
+
+        limit_out=str(input(":"))
+        columns.append(limit_out)
+        sc=set(columns)
+        columns=list(sc)
+        try:
+            for val in columns:
+                print(choices[val])
+        except:
+            if limit_out is 'a':
+                pass
+            elif limit_out is '':
+                columns.remove('')
+            else:
+                columns.reverse()
+                columns.pop()
+                pass
+
+
+    if 'a' in columns:
+        columns=['1','2','3','4']
+
+    c=set(columns)
+    columns=list(c)
+    columns.sort()
+
+    print("Output columns will be:\n")
+    for val in columns:
+        print(choices[val])
+
     len_file=(len(l))
     search_val=''
 
     while search_val != 'exit':
-        search_val=str(input("Enter search input for Part#, Serial, PO# or SO# (or exit to end program): "))
+        search_val=str(input("\nEnter search input for Part#, Serial, PO# or SO# (or 'exit' or return to end program): "))
         if search_val =='exit':
             sys.exit()
         elif search_val=='':
@@ -67,14 +114,22 @@ def orderSearch():
             ts = time.time()
             st = datetime.datetime.fromtimestamp(ts).strftime('_%Y-%m-%d_@_%H.%M.%S')
             out=open('report__'+search_val+'__'+st+'.xls','w')
-            out.write("Serial#/PAK# \t CiscoPart# \t CiscoSO# \t CiscoPO# \t \n")
+            for fields in columns:
+                out.write(choices[fields]+'\t')
+            out.write('\n')
 
             i=0
+            lc=len(columns)
             while i < len_file:
                 rs=re.search(search_val,l[i])
                 if rs != None:
-                 print(l[i])
-                 out.write(l[i]+'\n')
+                    m=l[i].split('\t')
+                    for z in columns:
+                        z=int(z)
+                        z=z-1
+                        print(m[z])
+                        out.write(m[z]+'\t')
+                    out.write('\n')
                 i+=1
             out.close()
     sys.exit()
