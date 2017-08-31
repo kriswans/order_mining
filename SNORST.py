@@ -1,7 +1,7 @@
 """
 SNORST : Serial Number, Order Reporting & Search tool
 author: Kris Swanson kriswans@cisco.com
-Version: 0.2
+Version: 0.3
 """
 
 print('\n\n'+48*'*'+'\n\n')
@@ -15,10 +15,15 @@ def SNORST():
     import sys
     import os
 
-    os.chdir("Data")
     file_list=os.listdir()
-    lfl=len(file_list)
-    file_dict={}
+    if "Data" in file_list:
+        os.chdir("Data")
+        file_list=os.listdir()
+        lfl=len(file_list)
+        file_dict={}
+    else:
+        print("\n\nCreate 'Data' directory with tab delimited files and rerun program. Exiting...\n\n")
+        sys.exit()
     a=1
 
     while a <= lfl:
@@ -28,7 +33,7 @@ def SNORST():
     for c in file_dict:
         print ("Select ("+str(c)+") to search file: "+ str(file_dict[c]))
 
-    f_sel=input("Select file: ")
+    f_sel=input("\nSelect file: ")
     f_sel_list=[]
     f_sel_list.append(file_dict[int(f_sel)])
     for n in f_sel_list:
@@ -93,28 +98,34 @@ def SNORST():
         else:
             break
 
-    item=1
-    search_val=input('\nPlease enter search string: ')
-    ts = time.time()
-    st = datetime.datetime.fromtimestamp(ts).strftime('_%Y-%m-%d_@_%H.%M.%S')
-    out=open('report__'+search_val+'__'+st+'.xls','w')
-    for names in sel_list:
-        out.write(names)
-        out.write('\t')
-    out.write('\n')
+    search_val='None'
 
-    while item < len_rl:
-        rs=re.search(search_val,rl[item])
-        if rs != None:
-            field_list=rl[item].split('\t')
-            for idx in index_list:
-                out.write(field_list[int(idx)-1])
-                out.write("\t")
-            out.write("\n")
+    while search_val != '':
+        item=1
+        search_val=input('\nPlease enter search string: ')
+        if search_val != '':
+            ts = time.time()
+            st = datetime.datetime.fromtimestamp(ts).strftime('_%Y-%m-%d_@_%H.%M.%S')
+            out=open('report__'+search_val+'__'+st+'.xls','w')
+            for names in sel_list:
+                out.write(names)
+                out.write('\t')
+            out.write('\n')
+
+            while item < len_rl:
+                rs=re.search(search_val,rl[item])
+                if rs != None:
+                    field_list=rl[item].split('\t')
+                    for idx in index_list:
+                        out.write(field_list[int(idx)-1])
+                        out.write("\t")
+                    out.write("\n")
+                else:
+                    pass
+                item+=1
+            out.close()
         else:
-            pass
-        item+=1
-    out.close()
+            sys.exit()
 
 if __name__=="__main__":
     SNORST()
