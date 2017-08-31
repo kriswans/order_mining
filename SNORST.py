@@ -1,6 +1,7 @@
 """
 SNORST : Serial Number, Order Reporting & Search tool
 author: Kris Swanson kriswans@cisco.com
+Version: 0.2
 """
 
 print('\n\n'+48*'*'+'\n\n')
@@ -82,12 +83,16 @@ def SNORST():
         if sel != '':
             index_list.append(sel)
             sel_list.append(col_dict[int(sel)])
+            sel_list=set(sel_list)
+            sel_list=list(sel_list)
+            index_list=set(index_list)
+            index_list=list(index_list)
             print("\nColumns will be:\n")
             for items in sel_list:
                 print (items)
         else:
             break
-    len_sel_list=len(sel_list)
+
     item=1
     search_val=input('\nPlease enter search string: ')
     ts = time.time()
