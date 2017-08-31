@@ -22,7 +22,8 @@ def SNORST():
         lfl=len(file_list)
         file_dict={}
     else:
-        print("\n\nCreate 'Data' directory with tab delimited files and rerun program. Exiting...\n\n")
+        os.makedirs("Data")
+        print("\n\nCreated 'Data' directory. Populate with tab delimited files to search and rerun program. Exiting...\n\n")
         sys.exit()
     a=1
 
