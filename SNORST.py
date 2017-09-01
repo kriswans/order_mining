@@ -117,28 +117,64 @@ def SNORST():
         if search_val != '':
             ts = time.time()
             st = datetime.datetime.fromtimestamp(ts).strftime('_%Y-%m-%d_@_%H.%M.%S')
+            rec_filename='report_recurs_'+search_val+'__'+st+'.xls'
             out=open('report__'+search_val+'__'+st+'.xls','w')
-            print("\n\nWriting output to file:"+' report__'+search_val+'__'+st+'.xls\n\n')
+            rec=open(rec_filename,'w')
+            print("\n\nWriting output to file:"+' report__'+search_val+'__'+st+'.xls\n')
+            print("\n\nWriting output to file:"+' report_recurs_'+search_val+'__'+st+'.xls\n\n')
             for nums in index_list:
                 out.write(col_dict[int(nums)])
                 out.write('\t')
+                rec.write(col_dict[int(nums)])
+                rec.write('\t')
             out.write('\n')
+            rec.write('\n')
 
             while item < len_rl:
+                out_list=[]
                 rs=re.search(search_val,rl[item])
                 if rs != None:
                     field_list=rl[item].split('\t')
                     for idx in index_list:
                         out.write(field_list[int(idx)-1])
                         out.write("\t")
+                        out_list.append(field_list[int(idx)-1])
+                        len_out_list=len(out_list)
                     out.write("\n")
+                    rec_search=re.search(search_val,str(out_list))
+                    if rec_search != None:
+                        for thing in out_list:
+                            rec.write(thing)
+                            rec.write('\t')
+                        rec.write("\n")
+                    else:
+                        pass
+
                 else:
                     pass
                 item+=1
             out.close()
+            rec.close()
+
+            crunch_file='crunch_'+rec_filename
+            crunch=open(crunch_file,'w')
+            print("\n\nWriting"+crunch_file+"\n\n")
+            dup_file=open(rec_filename,'r')
+            dup_list=dup_file.readlines()
+            crunch.write(dup_list[0].rstrip('\n')+'\tCount/Occurences\n')
+            del dup_list[0]
+            dup_set=set(dup_list)
+            for item in dup_set:
+                crunch.write(item.rstrip('\n')+'\t'+str(dup_list.count(item)))
+                crunch.write('\n')
+            crunch.close()
+            dup_file.close()
+
+
+
         else:
             print("\n\nExiting Program\n\n")
-            time.sleep(5)
+            time.sleep(2)
             sys.exit()
 
 if __name__=="__main__":
