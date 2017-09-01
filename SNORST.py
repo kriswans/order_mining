@@ -1,12 +1,13 @@
 """
-SNORST : Serial Number, Order Reporting & Search tool
+SNORST : Serial Number, Order Reporting & Search Tool
 author: Kris Swanson kriswans@cisco.com
 Version: 0.3
 """
 
-print('\n\n'+48*'*'+'\n\n')
-print("Welcome to the SOF1 SNORST!")
-print('\n\n'+48*'*'+'\n\n')
+print('\n\n'+64*'*'+'\n\n')
+print("Welcome to the SOF1 SNORST!\n")
+print("(S)erial (N)umber, (O)rder (R)eporting & (S)earch (T)ool")
+print('\n\n'+64*'*'+'\n\n')
 
 def SNORST():
     import re
@@ -34,21 +35,25 @@ def SNORST():
     for c in file_dict:
         print ("Select ("+str(c)+") to search file: "+ str(file_dict[c]))
 
-    f_sel=input("\nSelect file: ")
-    f_sel_list=[]
-    f_sel_list.append(file_dict[int(f_sel)])
-    for n in f_sel_list:
-        print (n)
-    while f_sel != '':
-        f_sel=input("Select file or hit <Enter> to continue: ")
-        if f_sel != '':
-            f_sel_list.append(file_dict[int(f_sel)])
-            f_sel_list=set(f_sel_list)
-            f_sel_list=list(f_sel_list)
-            for n in f_sel_list:
-                print (n)
-        else:
-            break
+    try:
+        f_sel=input("\nSelect file: ")
+        f_sel_list=[]
+        f_sel_list.append(file_dict[int(f_sel)])
+        for n in f_sel_list:
+            print (n)
+        while f_sel != '':
+            f_sel=input("Select file or hit <Enter> to continue: ")
+            if f_sel != '':
+                f_sel_list.append(file_dict[int(f_sel)])
+                f_sel_list=set(f_sel_list)
+                f_sel_list=list(f_sel_list)
+                for n in f_sel_list:
+                    print (n)
+            else:
+                break
+    except:
+        print("\nNo file selected. Exiting... ")
+        sys.exit()
 
     print(f_sel_list)
     row_in_list=[]
@@ -74,42 +79,48 @@ def SNORST():
     for c in col_dict:
         print ("Select ("+str(c)+") to include columns: "+ str(col_dict[c]))
 
-    sel=input("Select columns: ")
-    sel_list=[]
-    index_list=[]
-    sel_list.append(col_dict[int(sel)])
-    index_list.append(sel)
+    try:
+        sel=input("Select columns: ")
+        sel_list=[]
+        index_list=[]
+        sel_list.append(col_dict[int(sel)])
+        index_list.append(sel)
 
-    for items in sel_list:
-        print (items)
+        for items in sel_list:
+            print (items)
 
-    while sel != '':
-        sel=input("\nSelect columns or hit <Enter> to continue to search: ")
+        while sel != '':
+            sel=input("\nSelect columns or hit <Enter> to continue to search: ")
 
-        if sel != '':
-            index_list.append(sel)
-            sel_list.append(col_dict[int(sel)])
-            sel_list=set(sel_list)
-            sel_list=list(sel_list)
-            index_list=set(index_list)
-            index_list=list(index_list)
-            print("\nColumns will be:\n")
-            for items in sel_list:
-                print (items)
-        else:
-            break
+            if sel != '':
+                index_list.append(sel)
+                sel_list.append(col_dict[int(sel)])
+                sel_list=set(sel_list)
+                sel_list=list(sel_list)
+                index_list=set(index_list)
+                index_list=list(index_list)
+                index_list.sort()
+                print("\nColumns will be:\n")
+                for items in index_list:
+                    print (col_dict[int(items)])
+            else:
+                break
+    except:
+        print("\nNo columns selected. Exiting ...")
+        sys.exit()
 
     search_val='None'
 
     while search_val != '':
         item=1
-        search_val=input('\nPlease enter search string: ')
+        search_val=input('\nPlease enter search string or <Enter> to exit: ')
         if search_val != '':
             ts = time.time()
             st = datetime.datetime.fromtimestamp(ts).strftime('_%Y-%m-%d_@_%H.%M.%S')
             out=open('report__'+search_val+'__'+st+'.xls','w')
-            for names in sel_list:
-                out.write(names)
+            print("\n\nWriting output to file:"+' report__'+search_val+'__'+st+'.xls\n\n')
+            for nums in index_list:
+                out.write(col_dict[int(nums)])
                 out.write('\t')
             out.write('\n')
 
@@ -126,6 +137,8 @@ def SNORST():
                 item+=1
             out.close()
         else:
+            print("\n\nExiting Program\n\n")
+            time.sleep(5)
             sys.exit()
 
 if __name__=="__main__":
