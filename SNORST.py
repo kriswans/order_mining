@@ -1,7 +1,7 @@
 """
 SNORST : Serial Number, Order Reporting & Search Tool
 author: Kris Swanson kriswans@cisco.com
-Version: 0.3
+Version: 0.4
 """
 
 print('\n\n'+64*'*'+'\n\n')
