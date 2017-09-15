@@ -1,5 +1,7 @@
 # order_mining
-app which is meant to read raw data as a tab delimited table and output based on desired columns and search variables.
+Project started as a toll to mine data from historical order indormation, hence the name.
+
+SNORTST.py is meant to read raw data as a tab delimited table and output based on desired columns and search variables.
 
 features:
 1. takes multiple files in the same format/layout, concatenates them, and read the column labels from the first row.
