@@ -14,7 +14,7 @@ roadmap items:
 
 1. 3 tier in put selection (Customer, subgroup/cell, time(by FY)
 2. predefined search types
-3. default values.
+3. persistent default values.
 4. column consistency check for concatenated files
 5. batch search input (i.e search a list of part numbers from input file)
 6. range by date (i.e. using 'ship date' column to define range)
