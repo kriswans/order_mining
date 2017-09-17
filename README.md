@@ -17,3 +17,6 @@ roadmap items:
 3. default values.
 4. column consistency check for concatenated files
 5. batch search input (i.e search a list of part numbers from input file)
+6. range by date (i.e. using 'ship date' column to define range)
+7. Web front end
+8. NoSQL backend DB
