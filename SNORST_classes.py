@@ -512,7 +512,7 @@ def get_result(colselect,fileselect,search,search_AND,exclude):
                 else:
                      pass
 
-    if search_AND != []:
+    if search_AND != ['']:
         AND_search_list=[]
         if result_list !=[]:
             for i in result_list:
