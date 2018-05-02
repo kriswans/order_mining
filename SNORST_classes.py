@@ -284,6 +284,7 @@ result_table_start='''\
 
 .navbar a:hover, .dropdown:hover .dropbtn {
     background-color:  #111;
+
 }
 
 .dropdown-content {
@@ -354,6 +355,8 @@ tr:nth-child(even) {
 <div class="navbar">
   <a href="/">Home</a>
   <a href="maito:kriswans@cisco.com">Contact</a>
+  <a href="/return-files/">Download Current Results</a>
+  <b><a class="active" href="/logout">Logout</a></b>
   <div class="dropdown">
     <button class="dropbtn">Search Within Results
       <i class="fa fa-caret-down"></i>
@@ -366,7 +369,7 @@ tr:nth-child(even) {
     </div>
 
   </div>
-  <b class="active" href="/logout">Logout</b>
+
 </div>
 </br>
 </br>

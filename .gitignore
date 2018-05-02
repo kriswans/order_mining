@@ -58,3 +58,4 @@ test.py
 *.txt
 *.xls
 auth.py
+*.json
