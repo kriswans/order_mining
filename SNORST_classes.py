@@ -344,7 +344,7 @@ tr:nth-child(even) {
 
 <div class="navbar">
   <a href="/">Home</a>
-  <a href="maito:kriswans@cisco.com">Contact</a>
+  <a href="mailto:kriswans@cisco.com">Contact</a>
   <a href="/return-files/">Download Current Results</a>
   <div class="dropdown">
     <button class="dropbtn">Search Within Results
