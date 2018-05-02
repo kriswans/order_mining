@@ -255,16 +255,6 @@ result_table_start='''\
     padding: 14px 16px;
     text-decoration: none;
 }
-.navbar b {
-    float: right;
-    font-family: verdana;
-    font-size: 16px;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-
-}
 
 .dropdown {
     float: left;
@@ -356,7 +346,6 @@ tr:nth-child(even) {
   <a href="/">Home</a>
   <a href="maito:kriswans@cisco.com">Contact</a>
   <a href="/return-files/">Download Current Results</a>
-  <b><a class="active" href="/logout">Logout</a></b>
   <div class="dropdown">
     <button class="dropbtn">Search Within Results
       <i class="fa fa-caret-down"></i>
