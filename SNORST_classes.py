@@ -347,7 +347,7 @@ tr:nth-child(even) {
   <a href="mailto:kriswans@cisco.com">Contact</a>
   <a href="/return-files/">Download Current Results</a>
   <div class="dropdown">
-    <button class="dropbtn">Search Within Results
+    <button class="dropbtn">Search Within Results:(Not yet functional)
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
