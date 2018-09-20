@@ -60,3 +60,7 @@ test.py
 auth.py
 *.json
 templates/1525289226.3676364.html
+SNORST_classes_debug.py
+templates/1537439412.8505864.html
+__pycache__/SNORST_classes.cpython-36.pyc
+__pycache__/scrap_2.cpython-36.pyc
